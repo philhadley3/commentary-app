@@ -1,5 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 
+// Use env var in production, fallback to relative in dev (Vite proxy)
+const API_BASE = (import.meta as any).env?.VITE_API_BASE || "";
+
+function api(path: string) {
+  const p = path.startsWith("/") ? path : `/${path}`;
+  return `${API_BASE}${p}`;
+}
+
 export default function App() {
   const [chapter, setChapter] = useState(1);
   const [verse, setVerse] = useState(1);
@@ -15,7 +23,7 @@ export default function App() {
   useEffect(() => {
     (async () => {
       try {
-        const r = await fetch("/api/chapters");
+        const r = await fetch(api("/api/chapters"));
         setChapters(await r.json());
       } catch {
         setChapters(Array.from({ length: 21 }, (_, i) => i + 1));
@@ -27,7 +35,7 @@ export default function App() {
   useEffect(() => {
     (async () => {
       try {
-        const r = await fetch(`/api/verses?chapter=${chapter}`);
+        const r = await fetch(api(`/api/verses?chapter=${chapter}`));
         const arr = await r.json();
         setVerses(arr);
         if (!arr.includes(verse)) setVerse(arr[0] || 1);
@@ -43,8 +51,8 @@ export default function App() {
     setError("");
     try {
       const [d, c] = await Promise.all([
-        fetch(`/api/darby?chapter=${ch}&verse=${v}`).then(r => r.json()).catch(() => ({ text: "" })),
-        fetch(`/api/commentary?chapter=${ch}&verse=${v}`).then(r => r.json())
+        fetch(api(`/api/darby?chapter=${ch}&verse=${v}`)).then(r => r.json()).catch(() => ({ text: "" })),
+        fetch(api(`/api/commentary?chapter=${ch}&verse=${v}`)).then(r => r.json())
       ]);
       setDarby(d?.text || "(Darby verse not found)");
       setCommentaryHtml(c?.commentaryHtml || "<p><em>No commentary found.</em></p>");
