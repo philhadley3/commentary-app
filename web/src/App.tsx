@@ -98,7 +98,7 @@ export default function App() {
 
   return (
     <div style={{maxWidth:1050, margin:"24px auto", padding:"0 16px", fontFamily:"system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif"}}>
-      <h1 style={{textAlign:"center", fontWeight:700, fontSize:20, margin:"0 0 12px"}}>Gospel of John — Darby & Commentary</h1>
+      <h1 style={{textAlign:"center", fontWeight:700, fontSize:20, margin:"0 0 12px"}}>Verse By Verse</h1>
 
       <div style={{display:"flex", gap:8, flexWrap:"wrap", justifyContent:"center", marginBottom:12}}>
         <select value={chapter} onChange={e => setChapter(parseInt(e.target.value,10))}>
@@ -126,12 +126,12 @@ export default function App() {
 
       <div style={{display:"flex", gap:16, flexWrap:"wrap"}}>
         <div style={{flex:"1 1 420px", border:"1px solid #e5e7eb", borderRadius:12, boxShadow:"0 1px 3px rgba(0,0,0,.06)", padding:16, background:"#fff"}}>
-          <div style={{fontWeight:700, fontSize:18, marginBottom:8}}>{title} — Darby</div>
+          <div style={{fontWeight:700, fontSize:18, marginBottom:8}}>{title}</div>
           <div style={{lineHeight:1.6}}><p>{loading ? "Loading…" : darby}</p></div>
         </div>
 
         <div style={{flex:"1 1 420px", border:"1px solid #e5e7eb", borderRadius:12, boxShadow:"0 1px 3px rgba(0,0,0,.06)", padding:16, background:"#fff"}}>
-          <div style={{fontWeight:700, fontSize:18, marginBottom:8}}>Commentary — Hamilton Smith</div>
+          <div style={{fontWeight:700, fontSize:18, marginBottom:8}}>Hamilton Smith - The Gospel Of John</div>
           <div style={{lineHeight:1.6}} dangerouslySetInnerHTML={{ __html: loading ? "<p>Loading…</p>" : commentaryHtml }} />
         </div>
       </div>
