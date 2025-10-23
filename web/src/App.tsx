@@ -100,27 +100,88 @@ export default function App() {
     <div style={{maxWidth:1050, margin:"24px auto", padding:"0 16px", fontFamily:"system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif"}}>
       <h1 style={{textAlign:"center", fontWeight:700, fontSize:20, margin:"0 0 12px"}}>Verse By Verse</h1>
 
-      <div style={{display:"flex", gap:8, flexWrap:"wrap", justifyContent:"center", marginBottom:12}}>
-        <select value={chapter} onChange={e => setChapter(parseInt(e.target.value,10))}>
-          {chapters.map(c => <option key={c} value={c}>Chapter {c}</option>)}
+      <div
+        style={{
+          display: "flex",
+          gap: 8,
+          flexWrap: "wrap",
+          justifyContent: "center",
+          marginBottom: 12,
+        }}
+      >
+        <select value={chapter} onChange={e => setChapter(parseInt(e.target.value, 10))}>
+          {chapters.map(c => (
+            <option key={c} value={c}>
+              Chapter {c}
+            </option>
+          ))}
         </select>
 
-        <select value={verse} onChange={e => setVerse(parseInt(e.target.value,10))}>
-          {verses.map(v => <option key={v} value={v}>Verse {v}</option>)}
+        <select value={verse} onChange={e => setVerse(parseInt(e.target.value, 10))}>
+          {verses.map(v => (
+            <option key={v} value={v}>
+              Verse {v}
+            </option>
+          ))}
         </select>
 
         <input
           placeholder="Jump e.g. John 3:16"
           value={jump}
           onChange={e => setJump(e.target.value)}
-          onKeyDown={e => { if (e.key === "Enter") onJump(); }}
-          style={{padding:"8px 10px", borderRadius:8, border:"1px solid #d1d5db"}}
+          onKeyDown={e => {
+            if (e.key === "Enter") onJump();
+          }}
+          style={{
+            padding: "8px 10px",
+            borderRadius: 8,
+            border: "1px solid #d1d5db",
+          }}
         />
-        <button onClick={onJump} style={{padding:"8px 10px", borderRadius:8, background:"#111827", color:"#fff", border:0, cursor:"pointer"}}>Go</button>
 
-        <button onClick={goPrev} style={{padding:"8px 10px", borderRadius:8, background:"#fff", border:"1px solid #d1d5db", cursor:"pointer"}}>← Prev</button>
-        <button onClick={goNext} style={{padding:"8px 10px", borderRadius:8, background:"#fff", border:"1px solid #d1d5db", cursor:"pointer"}}>Next →</button>
+        <button
+          onClick={onJump}
+          style={{
+            padding: "8px 10px",
+            borderRadius: 8,
+            background: "#111827",
+            color: "#fff",
+            border: 0,
+            cursor: "pointer",
+          }}
+        >
+          Go
+        </button>
+
+        <button
+          onClick={goPrev}
+          style={{
+            padding: "8px 10px",
+            borderRadius: 8,
+            background: "#fff",
+            border: "1px solid #d1d5db",
+            cursor: "pointer",
+            color: "#000", // 👈 explicitly set black
+          }}
+        >
+          ← Prev
+        </button>
+
+        <button
+          onClick={goNext}
+          style={{
+            padding: "8px 10px",
+            borderRadius: 8,
+            background: "#fff",
+            border: "1px solid #d1d5db",
+            cursor: "pointer",
+            color: "#000", // 👈 explicitly set black
+          }}
+        >
+          Next →
+        </button>
       </div>
+
 
       {error && <p style={{color:"#b91c1c", textAlign:"center"}}>{error}</p>}
 
